@@ -16,13 +16,13 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`${serverUrl}/api/get/tasks`)
+      .get(`${serverUrl}/api/tasks/get`)
       .then((res) => {
         setTasksDisplayed(res.data);
       })
       .catch(() => setTasksDisplayed([]));
     axios
-      .get(`${serverUrl}/api/get/folders`)
+      .get(`${serverUrl}/api/folders/get`)
       .then((res) => {
         setFoldersDisplayed(res.data);
       })
@@ -30,33 +30,69 @@ function App() {
   }, []);
 
   const submitTask = () => {
-    const folder = { folderName: folderName };
     let folderId = 0;
-    axios
-      .post(`${serverUrl}/api/get/folders/folder`, folder)
-      .then((res) => {
-        folderId = res.data[0].id;
-        const newTask = { folderId: folderId, taskName: taskName, completed: 0 };
-        axios.post(`${serverUrl}/api/insert`, newTask).then((response) => {
-          setTasksDisplayed(tasksDisplayed.concat(newTask));
+    if (folderName !== "") {
+      axios
+        .get(`${serverUrl}/api/folders/get/${folderName}`)
+        .then((res) => {
+          folderId = res.data[0].id;
+          console.log(folderId, "folder id");
+          const newTask = { folderId: folderId, taskName: taskName, completed: 0 };
+          axios.post(`${serverUrl}/api/tasks/insert`, newTask).then((response) => {
+            setTasksDisplayed([...tasksDisplayed, newTask]);
+          });
+          setTaskName("");
+          setFolderName("");
+        })
+        .catch(() => {
+          alert("The folder you especified does not exist in the database, please create it");
         });
-        setTaskName("");
-        setFolderName("");
-      })
-      .catch(() => {
-        alert("The folder you especified does not exist in the database, please create it");
-      });
+    } else {
+      alert("Please especify a folder name");
+    }
   };
 
   const createFolder = () => {
-    let folders = [];
-    axios.get(`${serverUrl}/api/folders`).then((res) => {
-      folders = res.data.map((folder) => folder.folderName);
-    });
-    if (!folders.includes(folderName)) {
-      const newFolder = { folderName: folderName };
-      axios.post(`${serverUrl}/api/folders/insert`, newFolder).then((response) => {});
+    if (folderName !== "") {
+      const foldersNames = foldersDisplayed.map((folder) => folder.folderName);
+      if (!foldersNames.includes(folderName)) {
+        const newFolder = { folderName: folderName };
+        axios.post(`${serverUrl}/api/folders/insert`, newFolder).then((response) => {
+          newFolder["id"] = response.data.insertId;
+          setFoldersDisplayed([...foldersDisplayed, newFolder]);
+          setFolderName("");
+        });
+      } else {
+        alert("Folder already created");
+      }
+    } else {
+      alert("Please especify a folder name");
     }
+  };
+
+  const handleComplete = (id) => {
+    console.log(id);
+  };
+
+  const deleteTask = (id) => {
+    axios.delete(`${serverUrl}/api/tasks/delete/${id}`).then((response) => {
+      setTasksDisplayed(tasksDisplayed.filter((task) => task.id !== id));
+      console.log(
+        "setting task displayed to",
+        tasksDisplayed.filter((task) => task.id !== id)
+      );
+    });
+  };
+
+  const deleteFolder = (folderId) => {
+    axios.get(`${serverUrl}/api/tasks/get/${folderId}`).then((response) => {
+      const idArr = response.data.map((task) => task.id);
+      console.log(idArr);
+      for (let i = 0; i < idArr.length; i++) {
+        console.log("deleting", idArr[i], "in position", i);
+        deleteTask(idArr[i]);
+      }
+    });
   };
 
   return (
@@ -65,7 +101,7 @@ function App() {
         <h1>Ensolvers To-do List</h1>
         <h2>Folders</h2>
 
-        <TasksDisplay folderArr={foldersDisplayed} tasksArr={tasksDisplayed}></TasksDisplay>
+        <TasksDisplay deleteFolder={deleteFolder} deleteTask={deleteTask} folderArr={foldersDisplayed} tasksArr={tasksDisplayed} handleComplete={handleComplete}></TasksDisplay>
         <br />
         <br />
         <br />
