@@ -83,6 +83,14 @@ app.post("/api/folders/insert", (req, res) => {
   });
 });
 
+app.delete("/api/folders/delete/:folderId", (req, res) => {
+  const folderId = req.params.folderId;
+  const sqlDelete = "DELETE FROM folder_list WHERE id = ?";
+  db.query(sqlDelete, [folderId], (err, result) => {
+    res.send(result);
+  });
+});
+
 //listen
 app.listen(SERVER_PORT, () => {
   console.log(`running on port ${SERVER_PORT}`);

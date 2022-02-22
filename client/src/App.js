@@ -36,9 +36,9 @@ function App() {
         .get(`${serverUrl}/api/folders/get/${folderName}`)
         .then((res) => {
           folderId = res.data[0].id;
-          console.log(folderId, "folder id");
           const newTask = { folderId: folderId, taskName: taskName, completed: 0 };
           axios.post(`${serverUrl}/api/tasks/insert`, newTask).then((response) => {
+            newTask["id"] = response.data.insertId;
             setTasksDisplayed([...tasksDisplayed, newTask]);
           });
           setTaskName("");
@@ -77,21 +77,20 @@ function App() {
   const deleteTask = (id) => {
     axios.delete(`${serverUrl}/api/tasks/delete/${id}`).then((response) => {
       setTasksDisplayed(tasksDisplayed.filter((task) => task.id !== id));
-      console.log(
-        "setting task displayed to",
-        tasksDisplayed.filter((task) => task.id !== id)
-      );
     });
   };
 
   const deleteFolder = (folderId) => {
     axios.get(`${serverUrl}/api/tasks/get/${folderId}`).then((response) => {
       const idArr = response.data.map((task) => task.id);
-      console.log(idArr);
       for (let i = 0; i < idArr.length; i++) {
-        console.log("deleting", idArr[i], "in position", i);
-        deleteTask(idArr[i]);
+        axios.delete(`${serverUrl}/api/tasks/delete/${idArr[i]}`).then((response) => {});
       }
+      setTasksDisplayed(tasksDisplayed.filter((task) => !idArr.includes(task.id)));
+
+      axios.delete(`${serverUrl}/api/folders/delete/${folderId}`).then((response) => {
+        setFoldersDisplayed(foldersDisplayed.filter((folder) => folder.id !== folderId));
+      });
     });
   };
 
