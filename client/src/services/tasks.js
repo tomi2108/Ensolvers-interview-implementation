@@ -1,6 +1,10 @@
 import axios from "axios";
+const { serverConfig } = JSON.parse(fs.readFileSync("../../../serverConfig.json"));
 
-const serverUrl = "http://localhost:3001";
+const serverDomain = serverConfig.url;
+const serverPort = serverConfig.port;
+
+const serverUrl = `${serverDomain}:${serverPort}`;
 
 //tasks services
 const task_getAll = () => {

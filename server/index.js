@@ -1,6 +1,7 @@
 //requirements
 const fs = require("fs");
 const { serverConfig } = JSON.parse(fs.readFileSync("../serverConfig.json"));
+const { dataBaseConfig } = JSON.parse(fs.readFileSync("../dataBaseConfig.json"));
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -11,10 +12,10 @@ const SERVER_PORT = serverConfig.port;
 
 //database
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "akjjyglc200",
-  database: "ensolversdb",
+  host: dataBaseConfig.host,
+  user: dataBaseConfig.user,
+  password: dataBaseConfig.password,
+  database: dataBaseConfig.database,
 });
 
 //use
@@ -118,5 +119,5 @@ app.get("/login/:username/:password", (req, res) => {
 
 //listen
 app.listen(SERVER_PORT, () => {
-  console.log(`running on port ${SERVER_PORT}`);
+  console.log(`Server running on port ${SERVER_PORT}`);
 });
