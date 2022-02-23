@@ -30,7 +30,7 @@ const Login = ({ setLogin }) => {
   };
 
   return (
-    <Container>
+    <Container style={{ fontFamily: "Poppins, Sans-serif" }}>
       <h1>Ensolvers Login Page</h1>
       {passError ? (
         <Alert variant="danger">

@@ -6,7 +6,7 @@ import Login from "./Login";
 const App = () => {
   const [login, setLogin] = useState(false);
 
-  return login ? <Todolist setLogin={setLogin} /> : <Login setLogin={setLogin} />;
+  return login ? <Todolist setLogin={setLogin} /> : <Login style={{ fontFamily: "Poppins, Sans-serif" }} setLogin={setLogin} />;
 };
 
 export default App;

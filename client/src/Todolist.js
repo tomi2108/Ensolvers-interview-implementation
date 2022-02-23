@@ -34,7 +34,7 @@ function Todolist({ setLogin }) {
 
     Service.task_add(newTask)
       .then((res) => {
-        console.log(res);
+        newTask["id"] = res.insertId;
         setTasksDisplayed([...tasksDisplayed, newTask]);
         setFolderName("");
       })
@@ -44,7 +44,8 @@ function Todolist({ setLogin }) {
   };
 
   const editTask = (id, editName) => {
-    Service.task_edit(id, editName).then((response) => {
+    Service.task_edit(id, editName).then((res) => {
+      console.log(res);
       setTasksDisplayed(tasksDisplayed.map((task) => (task.id !== id ? task : { folderId: task.folderId, taskName: editName, completed: task.completed })));
     });
   };
@@ -94,7 +95,7 @@ function Todolist({ setLogin }) {
   //render
 
   return (
-    <div className="App">
+    <div style={{ fontFamily: "Poppins, Sans-serif" }} className="App">
       <Container>
         <img src={require("./Images/logo.jpg")} style={{ width: "100px" }} alt="ensolvers-logo.jpg" />
         <Row>
