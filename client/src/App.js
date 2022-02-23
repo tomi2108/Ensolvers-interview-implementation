@@ -64,12 +64,14 @@ function App() {
     }
   };
 
-  const handleComplete = (id) => {
-    console.log(id);
+  const handleComplete = (id, complete) => {
+    axios.put(`${serverUrl}/api/tasks/update/complete/${id}/${complete}`).then((response) => {});
   };
 
   const editTask = (id, editName) => {
-    console.log(id, editName);
+    axios.put(`${serverUrl}/api/tasks/update/${id}/${editName}`).then((response) => {
+      setTasksDisplayed(tasksDisplayed.map((task) => (task.id !== id ? task : { folderId: task.folderId, taskName: editName, completed: task.completed })));
+    });
   };
 
   const deleteTask = (id) => {
@@ -94,6 +96,7 @@ function App() {
   return (
     <div className="App">
       <Container>
+        <img src={require("./Images/logo.jpg")} style={{ width: "100px" }} alt="ensolvers-logo.jpg" />
         <h1>Ensolvers To-do List</h1>
 
         <TaskForm folderName={folderName} setFolderName={setFolderName} createFolder={createFolder}></TaskForm>

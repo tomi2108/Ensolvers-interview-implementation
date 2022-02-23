@@ -18,7 +18,7 @@ const TaskForm = ({ folderName, setFolderName, createFolder }) => {
       </Form.Group>
 
       <br />
-      <Button onClick={createFolder} variant="info">
+      <Button className={"orange-btn"} onClick={createFolder} variant="info">
         Create folder
       </Button>
     </Form>

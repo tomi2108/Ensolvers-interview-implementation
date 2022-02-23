@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -16,22 +17,25 @@ const Task = ({ deleteTask, task, handleComplete, editTask }) => {
     <ListGroup.Item key={task.id}>
       <Container>
         <Row>
-          <Col xs={5}>
-            <input
-              checked={completed ? 1 : 0}
-              style={{ marginRight: "5px" }}
-              type="checkbox"
-              onChange={() => {
-                setCompleted(!completed);
-                handleComplete(task.id);
-              }}
-            ></input>
-            <p className={completed ? "text-muted text-decoration-line-through" : ""} s style={{ display: "inline" }}>
-              {task.taskName}
-            </p>
+          <Col xs={4}>
+            <label className="checkbox-container">
+              <p className={completed ? "text-muted text-decoration-line-through" : ""} style={{ lineHeight: "1.6em" }}>
+                {task.taskName}
+              </p>
+              <input
+                type="checkbox"
+                checked={completed ? 1 : 0}
+                style={{ marginRight: "5px" }}
+                onClick={() => {
+                  handleComplete(task.id, +!completed);
+                  setCompleted(!completed);
+                }}
+              />
+              <span className="checkmark"></span>
+            </label>
           </Col>
           <Col xs={3}>{editEnabled ? <Form.Control style={{}} value={editName} onChange={(e) => setEditName(e.target.value)} type="text" placeholder="Change task..."></Form.Control> : ""}</Col>
-          <Col xs={1}>
+          <Col xs={2}>
             {editEnabled ? (
               <Button
                 onClick={() => {
@@ -42,7 +46,7 @@ const Task = ({ deleteTask, task, handleComplete, editTask }) => {
                 variant="success"
                 size="sm"
               >
-                +
+                Save
               </Button>
             ) : (
               ""
@@ -53,6 +57,7 @@ const Task = ({ deleteTask, task, handleComplete, editTask }) => {
               onClick={() => {
                 setEditEnabled(!editEnabled);
               }}
+              className={"orange-outline-btn"}
               style={{ margin: "10px" }}
               size="sm"
               variant="outline-info"

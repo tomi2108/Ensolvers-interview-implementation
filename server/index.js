@@ -1,11 +1,13 @@
 //requirements
+const fs = require("fs");
+const { serverConfig } = JSON.parse(fs.readFileSync("../serverConfig.json"));
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
 const app = express();
 
-const SERVER_PORT = 3001;
+const SERVER_PORT = serverConfig.port;
 
 //database
 const db = mysql.createPool({
@@ -44,6 +46,23 @@ app.post("/api/tasks/insert", (req, res) => {
 
   const sqlInsert = "INSERT INTO task_list (folderId , taskName, completed) VALUES (?, ?, ?)";
   db.query(sqlInsert, [folderId, taskName, completed], (err, result) => {
+    res.send(result);
+  });
+});
+
+app.put("/api/tasks/update/:id/:edit", (req, res) => {
+  const taskId = req.params.id;
+  const taskEdit = req.params.edit;
+  const sqlUpdate = "UPDATE task_list SET taskName = ? WHERE id = ?";
+  db.query(sqlUpdate, [taskEdit, taskId], (err, result) => {
+    res.send(result);
+  });
+});
+app.put("/api/tasks/update/complete/:id/:complete", (req, res) => {
+  const taskId = req.params.id;
+  const taskComplete = req.params.complete;
+  const sqlUpdate = "UPDATE task_list SET completed = ? WHERE id = ?";
+  db.query(sqlUpdate, [taskComplete, taskId], (err, result) => {
     res.send(result);
   });
 });
