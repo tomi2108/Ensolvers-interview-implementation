@@ -19,14 +19,14 @@ const Task = ({ deleteTask, task, handleComplete, editTask }) => {
         <Row>
           <Col xs={4}>
             <label className="checkbox-container">
-              <p className={completed ? "text-muted text-decoration-line-through" : ""} style={{ lineHeight: "1.6em" }}>
+              <p className={completed ? "text-muted text-decoration-line-through" : ""} style={{ lineHeight: "2em", fontSize: "0.85em" }}>
                 {task.taskName}
               </p>
               <input
                 type="checkbox"
                 checked={completed ? 1 : 0}
                 style={{ marginRight: "5px" }}
-                onClick={() => {
+                onChange={() => {
                   handleComplete(task.id, +!completed);
                   setCompleted(!completed);
                 }}
@@ -34,7 +34,7 @@ const Task = ({ deleteTask, task, handleComplete, editTask }) => {
               <span className="checkmark"></span>
             </label>
           </Col>
-          <Col xs={3}>{editEnabled ? <Form.Control style={{}} value={editName} onChange={(e) => setEditName(e.target.value)} type="text" placeholder="Change task..."></Form.Control> : ""}</Col>
+          <Col xs={3}>{editEnabled ? <Form.Control size="sm" style={{}} value={editName} onChange={(e) => setEditName(e.target.value)} type="text" placeholder="Change task..."></Form.Control> : ""}</Col>
           <Col xs={2}>
             {editEnabled ? (
               <Button

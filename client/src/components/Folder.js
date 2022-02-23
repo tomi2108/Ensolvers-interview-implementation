@@ -22,7 +22,7 @@ const Folder = ({ folder, deleteFolder, addTask }) => {
               <Form.Control value={taskName} onChange={(e) => setTaskName(e.target.value)} type="text" placeholder="Your task..."></Form.Control>
               <Button
                 onClick={() => {
-                  addTask(folder.folderName, taskName);
+                  addTask(folder.id, taskName);
                   setTaskName("");
                 }}
                 style={{ margin: "10px" }}

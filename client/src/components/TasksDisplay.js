@@ -12,9 +12,9 @@ const TasksDisplay = ({ editTask, addTask, folderName, deleteFolder, deleteTask,
     <Container fluid style={{ padding: "20px", borderRadius: "1em", backgroundColor: "#909DAA" }}>
       {folderArr.map((folder) => {
         return (
-          <>
-            <Card key={folder.id} bg="light">
-              <Folder addTask={addTask} folderName={folderName} folder={folder} deleteFolder={deleteFolder} />
+          <div key={folder.id}>
+            <Card bg="light">
+              <Folder key={folder.id} addTask={addTask} folderName={folderName} folder={folder} deleteFolder={deleteFolder} />
               <br />
               <br />
               <br />
@@ -29,7 +29,7 @@ const TasksDisplay = ({ editTask, addTask, folderName, deleteFolder, deleteTask,
               </Card.Body>
             </Card>
             <br />
-          </>
+          </div>
         );
       })}
     </Container>

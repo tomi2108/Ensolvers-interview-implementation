@@ -78,7 +78,6 @@ app.delete("/api/tasks/delete/:id", (req, res) => {
 //folders
 app.get("/api/folders/get", (req, res) => {
   const sqlSelect = "SELECT * FROM folder_list";
-
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -87,9 +86,7 @@ app.get("/api/folders/get", (req, res) => {
 app.get("/api/folders/get/:folderName", (req, res) => {
   const folderName = req.params.folderName;
   const sqlSelect = "SELECT * FROM folder_list WHERE folderName = ?";
-  console.log(folderName);
   db.query(sqlSelect, [folderName], (err, result) => {
-    console.log(result);
     res.send(result);
   });
 });
@@ -106,6 +103,15 @@ app.delete("/api/folders/delete/:folderId", (req, res) => {
   const folderId = req.params.folderId;
   const sqlDelete = "DELETE FROM folder_list WHERE id = ?";
   db.query(sqlDelete, [folderId], (err, result) => {
+    res.send(result);
+  });
+});
+
+app.get("/login/:username/:password", (req, res) => {
+  const username = req.params.username;
+  const password = req.params.password;
+  const sqlSelect = "SELECT * FROM users_list WHERE username = ? AND password = ?";
+  db.query(sqlSelect, [username, password], (err, result) => {
     res.send(result);
   });
 });

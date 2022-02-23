@@ -1,36 +1,36 @@
 .orange-outline-btn {
-  box-shadow: orange;
-  outline-color: orange;
-  color: orange;
-  border-color: orange;
+  box-shadow: rgb(242, 158, 62);
+  outline-color: rgb(242, 158, 62);
+  color: rgb(242, 158, 62);
+  border-color: rgb(242, 158, 62);
 }
 
 .orange-outline-btn:hover {
-  border-color: orange;
-  background-color: orange;
+  border-color: rgb(242, 158, 62);
+  background-color: rgb(242, 158, 62);
   color: black;
 }
 .orange-outline-btn:active,
 .orange-outline-btn:focus,
 .orange-outline-btn:checked {
-  background-color: orange;
-  box-shadow: orange;
-  outline-color: orange;
+  background-color: rgb(242, 158, 62);
+  box-shadow: rgb(242, 158, 62);
+  outline-color: rgb(242, 158, 62);
   color: black;
 }
 
 .orange-btn {
-  background-color: orange;
-  border-color: orange;
+  background-color: rgb(242, 158, 62);
+  border-color: rgb(242, 158, 62);
 }
 .orange-btn:hover {
-  background-color: orange;
-  border-color: orange;
+  background-color: rgb(242, 158, 62);
+  border-color: rgb(242, 158, 62);
 }
 .orange-btn:active,
 .orange-btn:focus {
-  background-color: orange;
-  border-color: orange;
+  background-color: rgb(242, 158, 62);
+  border-color: rgb(242, 158, 62);
 }
 
 .checkbox-container {
@@ -55,6 +55,7 @@
 }
 
 .checkmark {
+  border-radius: 3px;
   position: absolute;
   top: 10px;
   left: 0;
@@ -68,7 +69,7 @@
 }
 
 .checkbox-container input:checked ~ .checkmark {
-  background-color: orange;
+  background-color: rgb(242, 158, 62);
 }
 
 .checkmark:after {
