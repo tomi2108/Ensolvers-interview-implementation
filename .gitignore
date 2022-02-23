@@ -6,3 +6,7 @@
 /client/build
 /server/build
 
+#
+/serverConfig.json
+/dataBaseConfig.json
+/client/src/serverConfig.json

@@ -45,7 +45,6 @@ function Todolist({ setLogin }) {
 
   const editTask = (id, editName) => {
     Service.task_edit(id, editName).then((res) => {
-      console.log(res);
       setTasksDisplayed(tasksDisplayed.map((task) => (task.id !== id ? task : { folderId: task.folderId, taskName: editName, completed: task.completed })));
     });
   };

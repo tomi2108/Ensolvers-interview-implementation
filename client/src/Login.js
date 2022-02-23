@@ -18,13 +18,14 @@ const Login = ({ setLogin }) => {
     loginService
       .login(username, password)
       .then((res) => {
-        console.log(res);
         if (res.length !== 0) {
           setLogin(true);
         } else {
           setPassError(true);
           setTimeout(() => setPassError(false), 4000);
         }
+        setUsername("");
+        setPassword("");
       })
       .catch(() => {});
   };

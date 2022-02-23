@@ -1,8 +1,9 @@
 import axios from "axios";
-const { serverConfig } = JSON.parse(fs.readFileSync("../../../serverConfig.json"));
 
-const serverDomain = serverConfig.url;
-const serverPort = serverConfig.port;
+const serverConfig = require("../serverConfig.json");
+
+const serverDomain = serverConfig.serverConfig.url;
+const serverPort = serverConfig.serverConfig.port;
 
 const serverUrl = `${serverDomain}:${serverPort}`;
 
@@ -57,7 +58,9 @@ const folder_delete = (id) => {
 //login service
 const login = (username, password) => {
   const req = axios.get(`${serverUrl}/login/${username}/${password}`);
-  return req.then((res) => res.data);
+  return req.then((res) => {
+    return res;
+  });
 };
 
 export default { task_getByFolderId, task_add, task_edit, task_delete, task_getAll, task_complete, folder_getAll, folder_add, folder_delete, login };
