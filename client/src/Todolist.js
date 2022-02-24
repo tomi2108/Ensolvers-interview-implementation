@@ -45,7 +45,7 @@ function Todolist({ setLogin }) {
 
   const editTask = (id, editName) => {
     Service.task_edit(id, editName).then((res) => {
-      setTasksDisplayed(tasksDisplayed.map((task) => (task.id !== id ? task : { folderId: task.folderId, taskName: editName, completed: task.completed })));
+      setTasksDisplayed(tasksDisplayed.map((task) => (task.id !== id ? task : { id: id, folderId: task.folderId, taskName: editName, completed: task.completed })));
     });
   };
 
@@ -58,6 +58,7 @@ function Todolist({ setLogin }) {
   const handleComplete = (id, complete) => {
     Service.task_complete(id, complete).then((response) => {});
   };
+
   //folders functions
 
   const createFolder = () => {

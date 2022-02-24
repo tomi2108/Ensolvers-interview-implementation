@@ -59,7 +59,7 @@ const folder_delete = (id) => {
 const login = (username, password) => {
   const req = axios.get(`${serverUrl}/login/${username}/${password}`);
   return req.then((res) => {
-    return res;
+    return res.data;
   });
 };
 
