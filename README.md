@@ -61,7 +61,7 @@ At the end of the script this should happen:
 
 1- All dependencies are installed
 
-2- ensolvers Database should be set up
+2- ensolversdb Database should be set up
 
 3- Server should be running in another terminal in the port especified
 
@@ -73,8 +73,7 @@ At the end of the script this should happen:
 
 
 
-**note: The script downloads all the code for the project and builds it. Only the build is necessary
-for the app to work but this is done in order to have the latest version of the app.
+**note: The script downloads all the code for the project and builds it. Only the build is necessary for the app to work but this is done in order to have the latest version of the app.
 
 
 
@@ -93,8 +92,16 @@ password: admin
 herokuAPP-front-end: https://ensolvers-to-do-list-tsn.herokuapp.com/
 
 
-**note: for the heroku app to work, you need to run the server locally on the port 3001 since the heroku app is only the front-end and database, and the heroku app was deployed without the script that configures both the server and the client to connect to the same port. The heroku app is configured to look for a local server on port 3001.
-This can be done by making sure the serverConfig.json on the root directory has "port:3001" and running "npm start" on the server directory.
+**note: for the heroku app to work, you need to run the server locally on the port 3001 and configure it to connect to the heroku database since the heroku app is only the front-end and database. The heroku app was deployed without the script that configures both the server and the client to connect to the same port so the heroku client app is configured to look for a local server on port 3001.
+This can be done by renaming the "dataBaseConfigHeroku.json" to "dataBaseConfig.json" and deleting the previous "dataBaseConfig.json" also making sure "serverConfig.json" on the root directory has "port:3001" and running "npm start" on the server directory.
+
+
+The "serverConfig.json" and "dataBaseConfig.json":
+
+"serverConfig.json" is a file located both in the root directory of the project and the src directory on the client-side. This files tells the server where to run and the client where to send its requests. The script creates both files equal and with the port especified.
+
+"dataBaseConfig.json" is a file located on the root directory of the project. This file tells the server which data base to connect to. The script creates this file in order to connect to a local database which is also set up by the script itself. The "dataBaseConfigHeroku.json" is a variant of this file used to connect to the database provided by heroku. The instructions to use this database instead of a local one are detailed above.
+
 
 
 The dependencies are:
