@@ -75,6 +75,8 @@ At the end of the script this should happen:
 
 **note: The script downloads all the code for the project and builds it. Only the build is necessary for the app to work but this is done in order to have the latest version of the app.
 
+To run the app you can run "npm start" on both the client and server directories.
+
 
 
 
