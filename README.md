@@ -24,6 +24,7 @@ asudo apt-get upgrade
 
 
 The script will do the following in this order:
+
 1- Install nodejs
 
 2- Install npm
@@ -57,13 +58,14 @@ The script will do the following in this order:
 
 
 At the end of the script this should happen:
+
 1- All dependencies are installed
 
 2- ensolvers Database should be set up
 
-2- Server should be running in another terminal in the port especified
+3- Server should be running in another terminal in the port especified
 
-3- Server should be connected to the newly created database
+4- Server should be connected to the newly created database
 
 5- Front-end app should be running and a link to it should be displayed in the terminal
 
@@ -78,7 +80,9 @@ for the app to work but this is done in order to have the latest version of the 
 
 
 The default user to login to the app is:
+
 username: admin
+
 password: admin
 
 
