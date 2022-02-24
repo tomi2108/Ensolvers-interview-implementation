@@ -1,12 +1,3 @@
 # dependencies
 /client/node_modules
 /server/node_modules
-
-# production
-/client/build
-/server/build
-
-#
-/serverConfig.json
-/dataBaseConfig.json
-/client/src/serverConfig.json
