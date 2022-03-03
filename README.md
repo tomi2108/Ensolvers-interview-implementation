@@ -152,3 +152,8 @@ Oracle VirtualBox -- to test the script in a virtual machine
 
 
 githubRepository: https://github.com/tomi2108/Ensolvers-interview-implementation
+
+///----------------------Appendix----------------------///
+
+I added this appendix out of due date to clarify that I have found a better way to deploy the app to Heroku with minimal code change and a cleaner and better file organization. The app in heroku is currently working perfectly and deployed both front-end and back-end in the same page with the dataBase provided by Heroku.
+This means that even though these change were made out of due date and will not be taken into account, I couldn't stand the whole workaround I had to do to make the Heroku app work so I fixed it and basically all the section about making the Heroku app work with a local server and the dataBaseConfigHeroku.json file can now be ignored. I decided to leave the descpription of the workaround on the README.md file because the fixing changes were not made in time and I wanted to leave a document stating the original error I had while trying to deploy to Heroku. Hope it does not make a huge difference! (:
