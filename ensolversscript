@@ -13,7 +13,7 @@ sudo mysql -u root -e "CREATE DATABASE ensolversdb;"
 sudo mysql -u root -ppassword -D ensolversdb -e "CREATE TABLE task_list(id INT NOT NULL AUTO_INCREMENT,folderID INT NOT NULL,taskname VARCHAR(45) NOT NULL,completed TINYINT(1),PRIMARY KEY(id));"
 sudo mysql -u root -ppassword -D ensolversdb -e "CREATE TABLE folder_list(id INT NOT NULL AUTO_INCREMENT,folderName VARCHAR(45) NOT NULL,PRIMARY KEY(id));"
 sudo mysql -u root -ppassword -D ensolversdb -e "CREATE TABLE users_list (id INT NOT NULL AUTO_INCREMENT,username VARCHAR(45) NOT NULL,password VARCHAR(45) NOT NULL,PRIMARY KEY(id));"
-sudo mysql -u root -ppassword -D ensolversdb -e 'INSERT INTO users_list VALUE ("1", "admin", "admin");'
+sudo mysql -u root -ppassword -D ensolversdb -e 'INSERT INTO users_list VALUE ("1",) "admin", "admin";'
 mkdir ensolvers-interview-implementation
 cd ensolvers-interview-implementation
 git clone https://github.com/tomi2108/Ensolvers-interview-implementation.git
